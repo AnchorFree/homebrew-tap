@@ -5,6 +5,7 @@ class TerraformProviderVultr < Formula
   head "https://github.com/AnchorFree/terraform-provider-vultr.git"
   version "0.0.1"
 
+  # I don't know how to specify that we depend on v1.7.3
   depends_on "go" => :build
 
   def install
@@ -16,8 +17,8 @@ class TerraformProviderVultr < Formula
     system "ln -s `pwd` build/src/github.com/AnchorFree/terraform-provider-vultr"
     system [
       "cd ./build/src/github.com/AnchorFree/terraform-provider-vultr &&",
-      "go get &&",
-      "go install",
+      "/usr/local/Cellar/go/1.7.3/bin/go get &&",
+      "/usr/local/Cellar/go/1.7.3/bin/go install",
       "-ldflags \"-X main.Version=#{version} -X main.GitCommit=#{sha[0,7]}",
       "-X main.GitBranch=master -X main.BuildTime=#{t}_Homebrew\""
     ].join(" ")
